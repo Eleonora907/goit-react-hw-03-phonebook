@@ -1,29 +1,21 @@
 import { ContactItem } from 'components/contactItem/contactItem';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { List } from './contactList.styled';
 
-export class ContactList extends Component {
-  render() {
-    const { contacts, filter, onDeleteContact } = this.props;
-
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-
-    return (
-      <List>
-        {filteredContacts.map(contact => (
-          <ContactItem
-            key={contact.id}
-            contact={contact}
-            onDeleteContact={onDeleteContact}
-          />
-        ))}
-      </List>
-    );
-  }
-}
+export const ContactList = ({ contacts, onDeleteContact }) => {
+  return (
+    <List>
+      {contacts.map(contact => (
+        <ContactItem
+          key={contact.id}
+          contact={contact}
+          onDeleteContact={onDeleteContact}
+        />
+      ))}
+    </List>
+  );
+};
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -34,3 +26,4 @@ ContactList.propTypes = {
     })
   ).isRequired,
 };
+

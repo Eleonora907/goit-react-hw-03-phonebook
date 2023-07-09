@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { DeleteButton, ListItem } from './contactItem.styled';
 
-export class ContactItem extends Component {
-  handleDelete = () => {
-    const { contact, onDeleteContact } = this.props;
+export const ContactItem = ({ contact, onDeleteContact }) => {
+  const handleDelete = () => {
     onDeleteContact(contact.id);
   };
 
-  render() {
-    const { contact } = this.props;
-
-    return (
-      <ListItem>
-        {contact.name}: {contact.number}
-        <DeleteButton type="button" onClick={this.handleDelete}>
-          Delete
-        </DeleteButton>
-      </ListItem>
-    );
-  }
-}
+  return (
+    <ListItem>
+      {contact.name}: {contact.number}
+      <DeleteButton type="button" onClick={handleDelete}>
+        Delete
+      </DeleteButton>
+    </ListItem>
+  );
+};
 
 ContactItem.propTypes = {
   contact: PropTypes.shape({
@@ -28,5 +23,5 @@ ContactItem.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
   }).isRequired,
- 
+  onDeleteContact: PropTypes.func.isRequired,
 };
